@@ -6,6 +6,12 @@ let msg = document.querySelector("#msg");
 let draw = document.querySelector(".draw");
 let hide = document.querySelector(".hide");
 
+//All Sounds
+const touch = document.querySelector("#click");
+const drawSound = document.querySelector("#drawSound");
+const winSound = document.querySelector("#winSound");
+const newgameSound = document.querySelector("#newgamesound");
+
 let turnO = true; // Player O
 
 let count = 0;
@@ -27,6 +33,9 @@ const winpatterns = [
 boxes.forEach((box) =>{
     box.addEventListener("click", () =>{
         count ++;
+
+        touch.play();
+        
         if(turnO){
             box.innerText = "O";
             turnO = false;
@@ -40,6 +49,7 @@ boxes.forEach((box) =>{
         //Checks the draw condition
         let iswinner = checkwinner();
         if(count === 9 && !iswinner){
+            drawSound.play();
             draw.classList.remove("hide");
         }
     });
@@ -56,6 +66,7 @@ const checkwinner = () =>{
         if(pos1 != "" && pos2 != "" && pos3 != ""){
             if(pos1 === pos2 && pos2 === pos3){
                 disableBoxes();
+                winSound.play();
                 showWinner(pos1);
 
                 //background color change after winning
@@ -80,6 +91,7 @@ function wait(seconds) {
 
 //Displaying the Winner
 const showWinner = (winner) => {
+    winSound.play();
     wait(1.2)
     .then(() => {
         msg.innerText = `Congratulation, Winner is ${winner}`;
@@ -104,6 +116,7 @@ const enableBoxes = () => {
 
 //Reset Game Function
 const resetGame = () => {
+    newgameSound.play();
     turnO = true;
     enableBoxes();
     msgContainer.classList.add("hide");
@@ -118,3 +131,4 @@ const resetGame = () => {
 //When "New Game"/"Reset Game" btn clicked then reset the game
 newbtn.addEventListener("click", resetGame);
 resetbtn.addEventListener("click", resetGame);
+
