@@ -101,11 +101,11 @@ html, body{
     color: white;
     border-radius: 1rem;
     border: none;
-    /* margin-bottom: 5vh; */
+    margin-bottom: 5vh;
 }
 
 .msg-container{
-  height: 100vmin;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,4 +120,10 @@ html, body{
 
 .hide{
   display: none;
+}
+
+.draw{
+  color: #ffffc7;
+  font-size: 5vmin;
+  margin-bottom: 20px;
 }

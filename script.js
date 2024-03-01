@@ -3,8 +3,13 @@ let resetbtn = document.querySelector("#reset-btn");
 let newbtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
+let draw = document.querySelector(".draw");
+let hide = document.querySelector(".hide");
 
 let turnO = true; // Player O
+
+let count = 0;
+
 
 //Winning Patterns(indexes)
 const winpatterns = [
@@ -21,6 +26,7 @@ const winpatterns = [
 //Checking the click on Boxes
 boxes.forEach((box) =>{
     box.addEventListener("click", () =>{
+        count ++;
         if(turnO){
             box.innerText = "O";
             turnO = false;
@@ -30,11 +36,15 @@ boxes.forEach((box) =>{
             turnO = true;
         }
         box.disabled = true;
-        checkwinner();
+
+        //Checks the draw condition
+        let iswinner = checkwinner();
+        if(count === 9 && !iswinner){
+            draw.classList.remove("hide");
+        }
     });
 
 });
-
 
 //Checking the Winning Condition
 const checkwinner = () =>{
@@ -45,17 +55,36 @@ const checkwinner = () =>{
 
         if(pos1 != "" && pos2 != "" && pos3 != ""){
             if(pos1 === pos2 && pos2 === pos3){
+                disableBoxes();
                 showWinner(pos1);
+
+                //background color change after winning
+                boxes[pattern[0]].style.backgroundColor = "#2C363F";
+                boxes[pattern[1]].style.backgroundColor = "#2C363F";
+                boxes[pattern[2]].style.backgroundColor = "#2C363F";
+
+                return true;
             }
         }
     }
 };
 
+//Wait Function to wait after a win
+function wait(seconds) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, seconds * 1000); // Convert seconds to milliseconds
+    });
+}
+
 //Displaying the Winner
 const showWinner = (winner) => {
-    msg.innerText = `Congratulation, Winner is ${winner}`;
-    msgContainer.classList.remove("hide");
-    disableBoxes();
+    wait(1.2)
+    .then(() => {
+        msg.innerText = `Congratulation, Winner is ${winner}`;
+        msgContainer.classList.remove("hide");
+    })
 };
 
 //After displaying the winner disabled all btns
@@ -78,6 +107,12 @@ const resetGame = () => {
     turnO = true;
     enableBoxes();
     msgContainer.classList.add("hide");
+    draw.classList.add("hide");
+    count = 0;
+    //after win the color back to previous
+    boxes.forEach((box) => {
+        box.style.backgroundColor = "#F2F5EA";
+    });
 };
 
 //When "New Game"/"Reset Game" btn clicked then reset the game
