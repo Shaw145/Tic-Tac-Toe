@@ -11,6 +11,10 @@ I'm immensely grateful to Shradha Khapra for her videos. I made this project wit
 
 ![Screenshot 2024-03-01 171223](https://github.com/Shaw145/Tic-Tac-Toe/assets/78732037/424dea77-d77a-4a30-837d-f50d7ee31509)     ![Screenshot 2024-03-01 173112](https://github.com/Shaw145/Tic-Tac-Toe/assets/78732037/57947220-93b8-42ef-85fa-688650ceccbb)
 
+## Demo
+
+https://github.com/Shaw145/Tic-Tac-Toe/assets/78732037/74423d12-7aec-4db4-bf9b-a645d628fcca
+
 
 ## Prerequisites
 
